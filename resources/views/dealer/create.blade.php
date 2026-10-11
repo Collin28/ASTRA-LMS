@@ -29,13 +29,11 @@
 
         <!-- nama page -->
         <div class="text-2xl text-white px-32 mt-8 font-bold">
-            <h1>Dealer Management</h1>
-        </div>
+            <h1>Create Dealer</h1>
 
-        <!-- add dealer -->
-        <div
-            class="border-2 text-white font-semibold w-32 flex justify-center rounded-2xl mt-8 ml-[600px] hover:text-[#ffe37a]">
-            <a href="" class="text-[18px]">Add Dealer</a>
+            <div class="text-white px-[350px] mt-4">
+                <a href="/dealer/"><- BACK</a>
+            </div>
         </div>
 
     </div>
@@ -44,34 +42,29 @@
     <div class="px-8 py-4 flex justify-center mt-4">
 
         <table>
-            <thead class="text-white border-2">
-                <tr class="">
-                    <th class="text-center px-40 pt-2 pb-2">Code</th>
-                    <th class="text-center px-40 pt-2 pb-2">Name</th>
-                    <th class="text-center px-40 pt-2 pb-2">Action</th>
-                </tr>
-            </thead>
+            <form action="{{ route('dealer.store') }}" method="POST">
+                @crsf 
+                <div class="text-white border-2 rounded-2xl p-10 flex flex-col gap-2 text-[20px]">
 
-            <tbody class="text-white border-2">
-                <tr>
-                    <td class="text-center pt-4 pb-2">1001</td>
-                    <td class="text-center pt-4 pb-2">Collin Lee</td>
+                    <label class="font-bold">Code</label>
 
-                    <td>
-                        <div class="flex items-center justify-center gap-2 pt-4 pb-4">
-                            <a href="" class="border-2 rounded-2xl bg-gray-500 text-[13px] pl-4 pr-4">Detail</a>
-                            <a href="" class="border-2 rounded-2xl bg-green-500 text-[13px] pl-4 pr-4">Edit</a>
+                    <input type="text" name="code" id="" class="rounded-2xl px-12 text-black p-[4px] mb-6">
+                    @error('code')
+                        <p>{{ $message }}</p>
+                    @enderror
 
-                            <form action="" method="POST">
-                                <button class="border-2 rounded-2xl bg-red-500 text-[13px] pl-4 pr-4">Hapus</button>
-                            </form>
-                        </div>
-                    </td>
+                    <label class="font-bold">Name</label>
 
-                </tr>
+                    <input type="text" name="name" id="" class="rounded-2xl px-12 text-black p-[4px]">
+                    @error('name')
+                        <p>{{ $message }}</p>
+                    @enderror
+                    <button type="submit"
+                        class="border-2 rounded-2xl mt-6 hover:text-[#ffe37a] hover:border-[#ffe37a]">Submit</button>
 
-            </tbody>
+                </div>
 
+            </form>
         </table>
 
     </div>

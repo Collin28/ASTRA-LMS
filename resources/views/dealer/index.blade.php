@@ -35,7 +35,7 @@
         <!-- add dealer -->
         <div
             class="border-2 text-white font-semibold w-32 flex justify-center rounded-2xl mt-8 ml-[600px] hover:text-[#ffe37a]">
-            <a href="" class="text-[18px]">Add Dealer</a>
+            <a href="/dealer/create" class="text-[18px]">Add Dealer</a>
         </div>
 
     </div>
@@ -53,23 +53,30 @@
             </thead>
 
             <tbody class="text-white border-2">
-                <tr>
-                    <td class="text-center pt-4 pb-2">1001</td>
-                    <td class="text-center pt-4 pb-2">Collin Lee</td>
+                @foreach($dealers as $dealer)
+                    <tr>
+                        <td class="text-center pt-4 pb-2">{{ $dealer->code }}</td>
 
-                    <td>
-                        <div class="flex items-center justify-center gap-2 pt-4 pb-4">
-                            <a href="" class="border-2 rounded-2xl bg-gray-500 text-[13px] pl-4 pr-4">Detail</a>
-                            <a href="" class="border-2 rounded-2xl bg-green-500 text-[13px] pl-4 pr-4">Edit</a>
+                        <td class="text-center pt-4 pb-2">{{ $dealer->name }}</td>
 
-                            <form action="" method="POST">
-                                <button class="border-2 rounded-2xl bg-red-500 text-[13px] pl-4 pr-4">Hapus</button>
-                            </form>
-                        </div>
-                    </td>
+                        <td>
+                            <div class="flex items-center justify-center gap-2 pt-4 pb-4">
+                                <a href="" class="border-2 rounded-2xl bg-gray-500 text-[13px] pl-4 pr-4">Detail</a>
+                                <a href="" class="border-2 rounded-2xl bg-green-500 text-[13px] pl-4 pr-4">Edit</a>
 
-                </tr>
+                                <form action="{{ route('dealer.destroy', ['dealer' => $dealer->id]) }}" method="POST"
+                                    onsubmit="return confirm('Apakah anda yakin untuk menghapus dealer ini?')">
+                                    @csrf
+                                    @method('DELETE')
 
+                                    <button type="submit"
+                                        class="border-2 rounded-2xl bg-red-500 text-[13px] pl-4 pr-4">Hapus</button>
+                                </form>
+                            </div>
+                        </td>
+
+                    </tr>
+                @endforeach
             </tbody>
 
         </table>
